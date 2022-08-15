@@ -19,3 +19,20 @@ Content-Type: application/json
 }
 
 ###
+
+GET http://localhost:5000/api/user/user-profile
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImV4cCI6MTY2MDU5NDA3NiwiaWF0IjoxNjYwNTkwNDc2LCJpc3MiOiJ2aWt5In0.UTVeCLqnjaSra7cSwv9SbDqXvetKc0GRDZaHkw4hfaI
+
+
+###
+
+PUT http://localhost:5000/api/user/user-update
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsImV4cCI6MTY2MDU5NDkxMywiaWF0IjoxNjYwNTkxMzEzLCJpc3MiOiJ2aWt5In0.jETIu79tJEsRLF6CCJ5ps2FBYL9Zagf0F9Amed-THiI
+
+{
+  "name" : "demo update",
+  "email" : "admin@demo.com",
+  "password" : "qweasd123"
+}
