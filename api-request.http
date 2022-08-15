@@ -1,7 +1,10 @@
 POST http://localhost:5000/api/auth/login
 Content-Type: application/json
 
-{}
+{
+  "email" : "admin@demo.com",
+  "password" : "qweasd123"
+}
 
 ###
 
@@ -9,6 +12,9 @@ POST http://localhost:5000/api/auth/register
 Content-Type: application/json
 
 {
+  "name" : "admin",
+  "email" : "admin@demo.com",
+  "password" : "qweasd123"
 
 }
 
