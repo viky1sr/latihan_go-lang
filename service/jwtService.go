@@ -22,7 +22,7 @@ type jwtService struct {
 	issuer    string
 }
 
-func NewJwtService() *jwtService {
+func NewJwtService() JWTService {
 	return &jwtService{
 		issuer:    "viky",
 		secretKey: getSecretKey(),
