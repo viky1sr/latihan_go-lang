@@ -30,12 +30,7 @@ func NewUserController(userService service.UserService, jwtService service.JWTSe
 
 func (c userController) Update(context *gin.Context) {
 	var userUpdateDTO dto.UserUpdateDTO
-	errDTO := context.ShouldBind(&userUpdateDTO)
-	if errDTO != nil {
-		res := helper.BuildErrorResponse("Failed to process request", errDTO.Error(), helper.EmptyObj{})
-		context.AbortWithStatusJSON(http.StatusBadRequest, res)
-		return
-	}
+	helper.ValidationUpdate(context, userUpdateDTO)
 
 	authHeader := context.GetHeader("Authorization")
 	token, errToken := c.jwtService.ValidateToken(authHeader)
