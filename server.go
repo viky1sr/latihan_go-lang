@@ -1,6 +1,11 @@
 package main
 
 import (
+	helmet "github.com/danielkov/gin-helmet"
+	"github.com/sirupsen/logrus"
+
+	"github.com/gin-contrib/cors"
+	"github.com/gin-contrib/gzip"
 	"github.com/gin-gonic/gin"
 	"github.com/viky1sr/latihan_go-lang.git/config"
 	"github.com/viky1sr/latihan_go-lang.git/pkg"
@@ -14,7 +19,8 @@ var (
 
 func main() {
 	defer config.CloseDatabaseConnection(db)
-	SetupRouter()
+	app := SetupRouter()
+	logrus.Fatal(app.Run(":" + pkg.GodotEnv("GO_PORT")))
 }
 
 func SetupRouter() *gin.Engine {
@@ -27,6 +33,15 @@ func SetupRouter() *gin.Engine {
 	} else {
 		gin.SetMode(gin.ReleaseMode)
 	}
+
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:  []string{"*"},
+		AllowMethods:  []string{"*"},
+		AllowHeaders:  []string{"*"},
+		AllowWildcard: true,
+	}))
+	r.Use(helmet.Default())
+	r.Use(gzip.Gzip(gzip.BestCompression))
 
 	routes.InitAuthRoute(db, r)
 	routes.InitUserRoute(db, r)
