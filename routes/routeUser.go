@@ -14,16 +14,8 @@ func InitUserRoute(db *gorm.DB, r *gin.Engine) {
 		userRepository repository.UserRepository = repository.NewUserRepository(db)
 		jwtService     service.JWTService        = service.NewJwtService()
 		userService    service.UserService       = service.NewUserService(userRepository)
-		authService    service.AuthService       = service.NewAuthService(userRepository)
-		authController controller.AuthController = controller.NewAuthController(authService, jwtService)
 		userController controller.UserController = controller.NewUserController(userService, jwtService)
 	)
-
-	authRoutes := r.Group("api/auth")
-	{
-		authRoutes.POST("/login", authController.Login)
-		authRoutes.POST("/register", authController.Register)
-	}
 
 	userRoute := r.Group("api/user", middleware.AuthorizeJWT(jwtService))
 	{

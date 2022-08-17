@@ -28,6 +28,7 @@ func SetupRouter() *gin.Engine {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
+	routes.InitAuthRoute(db, r)
 	routes.InitUserRoute(db, r)
 
 	return r
